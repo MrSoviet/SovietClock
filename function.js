@@ -43,5 +43,3 @@ function getDegree360(x) {
 }
 
 window.setInterval(drawLine, 500);
-
-//fuck you Jimmy
