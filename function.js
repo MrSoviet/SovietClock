@@ -1,29 +1,59 @@
-var alpha = 0;
+class ClockDate {
+    getClockHours(today = new Date()) {
+        const hour = today.getHours();
+        const minutes = this.getClockMinutes(today);
+
+        const clockHours = hour + (minutes / 60);
+        return clockHours;
+    }
+
+    getClockMinutes(today = new Date()) {
+        const minutes = today.getMinutes();
+        const seconds = this.getClockSeconds(today);
+
+        const clockMinutes = minutes + (seconds / 60);
+        return clockMinutes;
+    }
+
+    getClockSeconds(today = new Date()) {
+        const seconds = today.getSeconds();
+        const milliseconds = today.getMilliseconds();
+
+        const clockSeconds = (seconds + (milliseconds / 1000)) * 1.02564;
+        if (clockSeconds <= 60) {
+            return clockSeconds;
+        } else {
+            return 60;
+        }
+    }
+}
+
+const clock = new ClockDate();
 
 function drawLine() {
-    var today = new Date();
-    var hour = today.getHours();
-    var minute = today.getMinutes();
-    var second = today.getSeconds();
+    const today = new Date();
+    const hour = clock.getClockHours(today);
+    const minute = today.getMinutes();
+    const second = clock.getClockSeconds(today);
 
-    document.getElementById("lineHour").setAttribute("x2", getX(getDegree12(hour)));
-    document.getElementById("lineHour").setAttribute("y2", getY(getDegree12(hour)));
-    document.getElementById("lineMinute").setAttribute("x2", getX(getDegree60(minute)));
-    document.getElementById("lineMinute").setAttribute("y2", getY(getDegree60(minute)));
+    document.getElementById("lineHour").setAttribute("x2", getX(getDegree12(hour), 0.5));
+    document.getElementById("lineHour").setAttribute("y2", getY(getDegree12(hour), 0.5));
+    document.getElementById("lineMinute").setAttribute("x2", getX(getDegree60(minute), 0.9));
+    document.getElementById("lineMinute").setAttribute("y2", getY(getDegree60(minute), 0.9));
     document.getElementById("lineSecond").setAttribute("x2", getX(getDegree60(second)));
     document.getElementById("lineSecond").setAttribute("y2", getY(getDegree60(second)));
 
     console.log(hour + ":" + minute + ":" + second);
 };
 
-function getX(alpha) {
+function getX(alpha, factor = 1) {
     var alphaRad = alpha * Math.PI / 180.0;
-    return 200.0 * Math.cos(alphaRad) + 250.0;
+    return (200.0 * factor) * Math.cos(alphaRad) + 250.0;
 }
 
-function getY(alpha) {
+function getY(alpha, factor = 1) {
     var alphaRad = alpha * Math.PI / 180.0;
-    return -200.0 * Math.sin(alphaRad) + 250.0;
+    return (-200.0 * factor) * Math.sin(alphaRad) + 250.0;
 }
 
 function getDegree12(hour) {
@@ -38,8 +68,4 @@ function getDegree60(minute) {
     return 360 - 6 * minute + 90;
 }
 
-function getDegree360(x) {
-    return 360 - x + 90
-}
-
-window.setInterval(drawLine, 500);
+window.setInterval(drawLine, 10);
