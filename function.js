@@ -36,14 +36,10 @@ class ClockDate {
 const clock = new ClockDate();
 
 function drawLine() {
-    // const today = new Date();
-    // const hour = clock.getClockHours(today);
-    // const minute = today.getMinutes();
-    // const second = clock.getSBBClockSeconds(today);
-
-    const hour = 10.2;
-    const minute = 9;
-    const second = 36.75;
+    const today = new Date();
+    const hour = clock.getClockHours(today);
+    const minute = today.getMinutes();
+    const second = clock.getSBBClockSeconds(today);
 
     document.getElementById("lineHour").setAttribute("x2", getX(getDegree12(hour), 0.5));
     document.getElementById("lineHour").setAttribute("y2", getY(getDegree12(hour), 0.5));

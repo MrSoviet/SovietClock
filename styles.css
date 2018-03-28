@@ -1,7 +1,7 @@
 svg {
     height: 500px;
     width: 500px;
-    background-image: url("clock_sbb_new.png");
+    background-image: url("clockbackground.jpg");
     background-size: cover;
 }
 
@@ -19,5 +19,4 @@ line {
 
 #lineSecond {
     stroke: green;
-    line-height: 400px;
 }
