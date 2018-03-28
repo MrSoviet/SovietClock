@@ -19,7 +19,12 @@ class ClockDate {
         const seconds = today.getSeconds();
         const milliseconds = today.getMilliseconds();
 
-        const clockSeconds = (seconds + (milliseconds / 1000)) * 1.02564;
+        const clockSeconds = (seconds + (milliseconds / 1000));
+        return clockSeconds;
+    }
+
+    getSBBClockSeconds(today = new Date()) {
+        const clockSeconds = this.getClockSeconds(today) * 1.025641025641025641025641025641;
         if (clockSeconds <= 60) {
             return clockSeconds;
         } else {
@@ -31,10 +36,14 @@ class ClockDate {
 const clock = new ClockDate();
 
 function drawLine() {
-    const today = new Date();
-    const hour = clock.getClockHours(today);
-    const minute = today.getMinutes();
-    const second = clock.getClockSeconds(today);
+    // const today = new Date();
+    // const hour = clock.getClockHours(today);
+    // const minute = today.getMinutes();
+    // const second = clock.getSBBClockSeconds(today);
+
+    const hour = 10.2;
+    const minute = 9;
+    const second = 36.75;
 
     document.getElementById("lineHour").setAttribute("x2", getX(getDegree12(hour), 0.5));
     document.getElementById("lineHour").setAttribute("y2", getY(getDegree12(hour), 0.5));
